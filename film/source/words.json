@@ -1,0 +1,448 @@
+{
+  "method": "Local NeMo multilingual FastConformer CTC / sherpa-onnx acoustic token timestamps; word boundaries from actual whitespace tokens, not equal time division.",
+  "time_resolution_seconds": 0.08,
+  "uncertainties": [],
+  "words": [
+    {
+      "word": "Masz",
+      "start": 0.0,
+      "end": 0.4
+    },
+    {
+      "word": "czasem",
+      "start": 0.48,
+      "end": 0.8
+    },
+    {
+      "word": "wrażenie,",
+      "start": 0.88,
+      "end": 1.2
+    },
+    {
+      "word": "że",
+      "start": 1.36,
+      "end": 1.44
+    },
+    {
+      "word": "im",
+      "start": 1.52,
+      "end": 1.76
+    },
+    {
+      "word": "więcej",
+      "start": 1.84,
+      "end": 2.08
+    },
+    {
+      "word": "robisz",
+      "start": 2.24,
+      "end": 2.56
+    },
+    {
+      "word": "dla",
+      "start": 2.64,
+      "end": 2.72
+    },
+    {
+      "word": "swojej",
+      "start": 2.8,
+      "end": 3.2
+    },
+    {
+      "word": "skóry,",
+      "start": 3.28,
+      "end": 3.76
+    },
+    {
+      "word": "tym",
+      "start": 3.84,
+      "end": 4.0
+    },
+    {
+      "word": "trudniej",
+      "start": 4.08,
+      "end": 4.48
+    },
+    {
+      "word": "ją",
+      "start": 4.72,
+      "end": 4.8
+    },
+    {
+      "word": "zrozumieć?",
+      "start": 4.88,
+      "end": 5.76
+    },
+    {
+      "word": "Nowy",
+      "start": 5.92,
+      "end": 6.16
+    },
+    {
+      "word": "żel.",
+      "start": 6.4,
+      "end": 6.88
+    },
+    {
+      "word": "Nowe",
+      "start": 6.96,
+      "end": 7.2
+    },
+    {
+      "word": "serum.",
+      "start": 7.28,
+      "end": 8.0
+    },
+    {
+      "word": "Potem",
+      "start": 8.0,
+      "end": 8.32
+    },
+    {
+      "word": "jeszcze",
+      "start": 8.4,
+      "end": 8.48
+    },
+    {
+      "word": "kwas.",
+      "start": 8.8,
+      "end": 9.2
+    },
+    {
+      "word": "I",
+      "start": 9.36,
+      "end": 9.44
+    },
+    {
+      "word": "kiedy",
+      "start": 9.68,
+      "end": 9.92
+    },
+    {
+      "word": "pojawia",
+      "start": 9.92,
+      "end": 10.4
+    },
+    {
+      "word": "się",
+      "start": 10.48,
+      "end": 10.56
+    },
+    {
+      "word": "podrażnienie…",
+      "start": 10.64,
+      "end": 11.52
+    },
+    {
+      "word": "nie",
+      "start": 11.68,
+      "end": 11.76
+    },
+    {
+      "word": "wiesz,",
+      "start": 11.92,
+      "end": 12.08
+    },
+    {
+      "word": "co",
+      "start": 12.24,
+      "end": 12.32
+    },
+    {
+      "word": "właściwie",
+      "start": 12.48,
+      "end": 12.88
+    },
+    {
+      "word": "je",
+      "start": 12.96,
+      "end": 13.04
+    },
+    {
+      "word": "wywołało.",
+      "start": 13.2,
+      "end": 14.0
+    },
+    {
+      "word": "Dlatego",
+      "start": 14.08,
+      "end": 14.48
+    },
+    {
+      "word": "przy",
+      "start": 14.56,
+      "end": 14.64
+    },
+    {
+      "word": "zmianach",
+      "start": 14.8,
+      "end": 15.28
+    },
+    {
+      "word": "w",
+      "start": 15.28,
+      "end": 15.36
+    },
+    {
+      "word": "pielęgnacji",
+      "start": 15.52,
+      "end": 16.24
+    },
+    {
+      "word": "warto",
+      "start": 16.32,
+      "end": 16.64
+    },
+    {
+      "word": "wprowadzać",
+      "start": 16.64,
+      "end": 17.36
+    },
+    {
+      "word": "jedną",
+      "start": 17.52,
+      "end": 17.76
+    },
+    {
+      "word": "rzecz",
+      "start": 17.92,
+      "end": 18.08
+    },
+    {
+      "word": "naraz",
+      "start": 18.16,
+      "end": 18.56
+    },
+    {
+      "word": "i",
+      "start": 18.64,
+      "end": 18.72
+    },
+    {
+      "word": "dać",
+      "start": 18.88,
+      "end": 19.04
+    },
+    {
+      "word": "sobie",
+      "start": 19.12,
+      "end": 19.36
+    },
+    {
+      "word": "czas",
+      "start": 19.44,
+      "end": 19.52
+    },
+    {
+      "word": "na",
+      "start": 19.68,
+      "end": 19.76
+    },
+    {
+      "word": "obserwację.",
+      "start": 19.84,
+      "end": 20.8
+    },
+    {
+      "word": "Zamiast",
+      "start": 20.88,
+      "end": 21.36
+    },
+    {
+      "word": "śledzić",
+      "start": 21.52,
+      "end": 22.0
+    },
+    {
+      "word": "każdą",
+      "start": 22.16,
+      "end": 22.56
+    },
+    {
+      "word": "nowość,",
+      "start": 22.64,
+      "end": 23.12
+    },
+    {
+      "word": "wróć",
+      "start": 23.12,
+      "end": 23.6
+    },
+    {
+      "word": "do",
+      "start": 23.68,
+      "end": 23.76
+    },
+    {
+      "word": "podstaw:",
+      "start": 23.84,
+      "end": 24.24
+    },
+    {
+      "word": "łagodnego",
+      "start": 24.64,
+      "end": 25.12
+    },
+    {
+      "word": "oczyszczania,",
+      "start": 25.28,
+      "end": 26.0
+    },
+    {
+      "word": "nawilżania",
+      "start": 26.08,
+      "end": 26.88
+    },
+    {
+      "word": "i",
+      "start": 26.96,
+      "end": 27.04
+    },
+    {
+      "word": "ochrony",
+      "start": 27.2,
+      "end": 27.6
+    },
+    {
+      "word": "przed",
+      "start": 27.68,
+      "end": 27.84
+    },
+    {
+      "word": "słońcem.",
+      "start": 27.92,
+      "end": 28.72
+    },
+    {
+      "word": "Nie",
+      "start": 28.8,
+      "end": 28.88
+    },
+    {
+      "word": "chodzi",
+      "start": 29.04,
+      "end": 29.36
+    },
+    {
+      "word": "o",
+      "start": 29.44,
+      "end": 29.52
+    },
+    {
+      "word": "to,",
+      "start": 29.6,
+      "end": 29.68
+    },
+    {
+      "word": "żeby",
+      "start": 29.84,
+      "end": 30.08
+    },
+    {
+      "word": "używać",
+      "start": 30.16,
+      "end": 30.56
+    },
+    {
+      "word": "jak",
+      "start": 30.64,
+      "end": 30.72
+    },
+    {
+      "word": "najmniej",
+      "start": 30.88,
+      "end": 31.36
+    },
+    {
+      "word": "za",
+      "start": 31.44,
+      "end": 31.52
+    },
+    {
+      "word": "wszelką",
+      "start": 31.68,
+      "end": 32.16
+    },
+    {
+      "word": "cenę.",
+      "start": 32.32,
+      "end": 32.56
+    },
+    {
+      "word": "Chodzi",
+      "start": 32.96,
+      "end": 33.28
+    },
+    {
+      "word": "o",
+      "start": 33.36,
+      "end": 33.44
+    },
+    {
+      "word": "to,",
+      "start": 33.52,
+      "end": 33.6
+    },
+    {
+      "word": "żeby",
+      "start": 33.76,
+      "end": 34.08
+    },
+    {
+      "word": "wiedzieć,",
+      "start": 34.24,
+      "end": 34.56
+    },
+    {
+      "word": "po",
+      "start": 34.72,
+      "end": 34.8
+    },
+    {
+      "word": "co",
+      "start": 34.96,
+      "end": 35.04
+    },
+    {
+      "word": "używasz",
+      "start": 35.12,
+      "end": 35.6
+    },
+    {
+      "word": "danego",
+      "start": 35.76,
+      "end": 36.0
+    },
+    {
+      "word": "produktu.",
+      "start": 36.16,
+      "end": 36.64
+    },
+    {
+      "word": "To",
+      "start": 36.88,
+      "end": 36.96
+    },
+    {
+      "word": "właśnie",
+      "start": 37.28,
+      "end": 37.6
+    },
+    {
+      "word": "początek",
+      "start": 37.84,
+      "end": 38.4
+    },
+    {
+      "word": "świadomej",
+      "start": 38.48,
+      "end": 39.04
+    },
+    {
+      "word": "pielęgnacji.",
+      "start": 39.2,
+      "end": 39.76
+    }
+  ],
+  "transcript_source": "Original ElevenLabs script supplied by user; CTC acoustic timestamps retained."
+}
