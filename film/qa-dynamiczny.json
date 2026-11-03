@@ -1,0 +1,24 @@
+{
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "decoded_frames": 1200,
+    "duration": 40.0,
+    "codec": "h264",
+    "pix_fmt": "yuv420p"
+  },
+  "black_frames": [],
+  "adjacent_frame_difference": {
+    "min": 0.0001286008230452675,
+    "max": 10.392023533950617,
+    "mean": 0.7062929080560961,
+    "identical_frame_pairs": 0
+  },
+  "subtitle_words": 88,
+  "subtitle_phrases": 30,
+  "highlight_events": 88,
+  "subtitle_layout_checks": "passed including maximum word scale; left>=110, right<=900, centers y=1440..1540; camera stage ends y=1325",
+  "sha256": "e62aeb274ce1d24c87a45acd78461ebba51f20f502c01a38069caf6a97a6a5c7",
+  "decode_errors": ""
+}

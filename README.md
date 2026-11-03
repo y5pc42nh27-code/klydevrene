@@ -1,4 +1,18 @@
-# Klyde Vrene — edukacyjny TikTok
+# Klyde Vrene — dynamiczny storytelling
+
+Nowa iteracja istniejącego filmu: kamera prowadzona narracją, mocniejsza ekspresja,
+większe pogrubione napisy. Ten sam głos, tekst, czasy słów i minimalistyczna oprawa.
+
+- [Nowy film — MP4 1080 × 1920, 30 FPS](film/Klyde-Vrene-dynamiczny.mp4)
+- [Porównanie w dwóch odtwarzaczach](film/porownanie.html) — pobierz pliki i otwórz HTML lokalnie; GitHub pokazuje kod strony.
+- [Poprzedni zaakceptowany film](film/Klyde-Vrene-TikTok.mp4) — zachowany bez zmian.
+- [Raport zmian i ocena odbioru](film/RAPORT-DYNAMIKA.md)
+- [Edytowalne źródła i eksport](film/source/README.md)
+- [Napisy SRT](film/dynamiczny.srt) · [ASS z animacjami](film/dynamiczny.ass)
+- [Pakiet do pobrania](film/Klyde-Vrene-dynamiczny-komplet.zip)
+
+## Poprzednia wersja i dokumentacja bazowa
+
 
 Film o świadomym wprowadzaniu kosmetyków: 1080 × 1920, 30 FPS, 40 sekund, oryginalna polska narracja ElevenLabs.
 

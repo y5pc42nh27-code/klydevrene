@@ -71,23 +71,29 @@ def mirror(d,t,irritated=False):
 def character(d,t,x=410,gesture='inspect',weight=1):
  # Fully jointed limbs; targets interpolated with quintic easing, solved with IK.
  breath=3*wave(t); sway=4*wave(t*.55)
- hip=(x+sway,1058+breath); neck=(x+8*wave(t*.7),837+breath)
+ # Purposeful lean: recoil, hesitation, then a relaxed exhale.
+ recoil=(ramp(t,1.12,1.32)*(1-ramp(t,1.55,2.1))) if gesture=='confused' else 0
+ lean={'inspect':12*math.sin(t*1.6),'place':18,'confused':-22-24*recoil,
+       'remove':14,'observe':-5,'basics':-3,'read':16}.get(gesture,0)
+ hip=(x+sway,1058+breath); neck=(x+lean+8*wave(t*.7),837+breath-14*recoil)
  shoulderL=(neck[0]-48,neck[1]+29); shoulderR=(neck[0]+48,neck[1]+29)
  left=(x-69+4*wave(t),1050+breath); right=(x+80,1012+breath)
  tilt=-.06+.025*wave(t)
  if gesture=='inspect':
   u=.5+.5*wave(t*.8); right=(x+48+4*u,810+5*wave(t)); left=(x-84,1016+8*wave(t))
  elif gesture=='place':
-  i=min(2,int(max(0,t)/1.05)); u=ramp(t,i*1.05,i*1.05+.8)
+  # Three reaches match Nowy zel / Nowe serum / kwas, with continuous hand paths.
+  i,u=product_motion(t)
   bx=lerp(565,610+i*56,u); by=lerp(1110,1037,u)-55*math.sin(math.pi*u)
-  right=(bx-15,by-85); left=(x-69,1040+4*wave(t)); tilt=.04*u
-  if t-i*1.05>.8 and i<2:
-   right=blend(right,(550,1025),ramp(t-i*1.05,.8,1.05))
+  right=(bx-15,by-85); left=(x-69,1040+4*wave(t)); tilt=.07+.04*u
+  # Return to the pickup point before the next reach, rather than snapping poses.
+  end=[1.05,2.15,3.55][i]
+  right=blend(right,(550,1025),ramp(t,end-.22,end))
  elif gesture=='confused':
-  u=ramp(t,0,.8); left=blend(left,(x-133,898+12*wave(t)),u)
-  right=blend(right,(x+135,891-12*wave(t)),u); tilt=.08*wave(t*.75)
+  u=ramp(t,0,.36); left=blend(left,(x-133,898+12*wave(t)),u)
+  right=blend(right,(x+135,891-12*wave(t)),u); tilt=-.15*recoil+.12*math.sin(t*2.4)
  elif gesture=='remove':
-  cyc=t%1.9; u=ramp(cyc,.1,.8)*(1-ramp(cyc,1.2,1.9))
+  u=ramp(t,2.2,3.5)*(1-ramp(t,4.5,5.5))
   right=blend((x+64,1010),(x+188,905),u); left=(x-87,985)
  elif gesture=='observe':
   right=(x+91,875+4*wave(t)); left=(x-53,1035); tilt=-.03
@@ -95,6 +101,10 @@ def character(d,t,x=410,gesture='inspect',weight=1):
   right=(x+141+12*wave(t*.7),902+15*wave(t)); left=(x-98,997+8*wave(t))
  elif gesture=='read':
   right=(x+112,899+3*wave(t)); left=(x+36,938+4*wave(t)); tilt=.12
+ if gesture=='remove':
+  u=ramp(t,5.51,5.96)
+  right=blend(right,(x+91,875+4*wave(t)),u)
+  left=blend(left,(x-53,1035),u)
  # legs have stable feet and moving knees rather than rigid rotating sticks
  for side in [-1,1]:
   a=(hip[0]+side*24,hip[1]+4); foot=(x+side*49,1260)
@@ -109,28 +119,42 @@ def character(d,t,x=410,gesture='inspect',weight=1):
  # head follows breathing and attention, with eyes looking toward task
  hx=neck[0]+tilt*65; hy=neck[1]-57
  d.ellipse((hx-48,hy-55,hx+48,hy+53),fill=RED)
- blink=abs(math.sin(t*1.25))<.06
- eye_shift=7 if gesture in ['inspect','read','observe','place'] else 0
+ blink=abs(math.sin((t+.3)*1.25))<.045
+ eye_shift=(7 if gesture in ['inspect','read','observe','place'] else -3)
+ if gesture=='inspect': eye_shift=lerp(-3,9,ramp(t,.45,1.0))
  for dx in [-16,16]:
   ex=hx+dx+eye_shift; ey=hy-5+tilt*dx
   if blink: line(d,[(ex-5,ey),(ex+5,ey)],BG,3)
-  else: d.ellipse((ex-4,ey-5,ex+4,ey+4),fill=BG)
+  else:
+   radius=4+3*recoil
+   d.ellipse((ex-radius,ey-5-3*recoil,ex+radius,ey+4+3*recoil),fill=BG)
  if gesture=='confused':
+  if recoil>.2: d.ellipse((hx-8,hy+15,hx+8,hy+32),outline=BG,width=3)
+  line(d,[(hx+8,hy-25),(hx+25,hy-20)],BG,3)
   d.arc((hx-14,hy+16,hx+15,hy+36),180,350,fill=BG,width=3)
   line(d,[(hx-23,hy-21),(hx-10,hy-26)],BG,3)
+ elif gesture=='inspect':
+  line(d,[(hx-25,hy-24),(hx-9,hy-29)],BG,3)
+  line(d,[(hx+9,hy-24),(hx+25,hy-20)],BG,3)
+  d.ellipse((hx-6,hy+16,hx+6,hy+27),outline=BG,width=3)
  else: d.arc((hx-13,hy+8,hx+17,hy+29),5,165,fill=BG,width=3)
  return left,right
+
+def product_motion(t):
+ starts=[0,1.05,2.15]; ends=[.9,1.95,2.95]
+ i=max(0,max((j for j,a in enumerate(starts) if t>=a),default=0))
+ return i,ramp(t,starts[i],ends[i])
 
 def shelf(d,t,count=3,remove=False):
  line(d,[(565,1040),(924,1040)],DIM,3)
  for i in range(count):
   x=610+i*56
   if remove and i>0:
-   u=ramp(t,(i-1)*.8,(i-1)*.8+1.1)
+   u=ramp(t,2.3+(i-1)*.45,3.3+(i-1)*.45)
    x=lerp(x,1070+i*50,u); y=lerp(1037,1140,u)
    bottle(d,x,y,i,alpha=1-u)
   else:
-   u=ramp(t,i*1.05,i*1.05+.8)
+   u=ramp(t,[0,1.05,2.15][i],[.9,1.95,2.95][i])
    bottle(d,lerp(565,x,u),lerp(1110,1037,u)-55*math.sin(math.pi*u),i,alpha=u)
 
 def symbol(d,x,y,k,t):
@@ -166,10 +190,10 @@ def scene(t,name):
   mirror(d,t,True); shelf(d,10,3)
   character(d,t-9.4,gesture='confused')
   for i in range(3):
-   u=ramp(t,11+i*.6,11.7+i*.6); x=300+i*83
-   txt(d,(x,620+7*wave(t,i)),'?',34,tuple(int(v*u+BG[j]*(1-u)) for j,v in enumerate(LIGHT)))
+   u=ramp(t,11.68+i*.16,11.95+i*.16); x=300+i*83
+   txt(d,(x,620+7*wave(t,i)),'?',48,tuple(int(v*u+BG[j]*(1-u)) for j,v in enumerate(LIGHT)))
  elif name=='one':
-  shelf(d,t-14.04,3,True); character(d,t-14.04,gesture='remove' if t<17.3 else 'observe')
+  shelf(d,t-14.04,3,True); character(d,t-14.04,gesture='remove' if t<20 else 'observe')
   if t>20:
    u=ramp(t,20,21)
    d.arc((566,847,655,993),230,300,fill=tuple(int(v*u+BG[j]*(1-u)) for j,v in enumerate(LIGHT)),width=3)
@@ -194,18 +218,50 @@ def scene(t,name):
    u=ramp(t,32,33); line(d,[(731,930),(747,946),(780,909)],tuple(int(v*u+BG[j]*(1-u)) for j,v in enumerate(LIGHT)),4)
  elif name=='cover':
   cover=Image.open(ROOT/'assets/cover.png').convert('RGB')
-  u=ramp(t,36.88,39.6); h=int(790+22*u); w=int(h*cover.width/cover.height)
+  u=ramp(t,36.88,38.3); h=int(790+22*u); w=int(h*cover.width/cover.height)
   cover=cover.resize((w*2,h*2),Image.Resampling.LANCZOS)
-  im.paste(cover,((W-w),920-int(8*u)*2))
+  im.paste(cover,((W-w),920+int(36*(1-u))*2))
   d=SmoothDraw(im); txt(d,(540,1326),'Klyde Vrene',29,(195,185,163))
  return im.resize((W,H),Image.Resampling.LANCZOS)
 
+# Storyboarded camera keys: (time, world x, world y, magnification).
+# Each shot has its own keys; cuts follow spoken thought, never crossfade bodies.
+CAMERA = {
+ 'mirror': [(0,420,795,2.25),(.42,416,780,2.65),(.9,416,780,2.65),
+            (1.45,770,788,2.9),(2.15,770,785,2.9),(2.85,570,900,1.18),
+            (4.1,565,900,1.18),(4.85,455,810,1.85),(5.85,455,810,1.85)],
+ 'products':[(5.85,555,930,1.55),(6.65,585,950,1.8),(6.9,590,950,1.8),
+             (7.55,635,947,2.0),(7.95,635,947,2.0),(8.65,680,940,2.2),(9.4,680,940,2.2)],
+ 'irritation':[(9.4,650,860,1.5),(10.55,770,775,2.9),(10.8,770,775,2.9),
+               (11.55,770,775,2.9),(11.95,407,785,2.55),(13.25,407,785,2.55),(14.04,440,835,2.0)],
+ 'one':[(14.04,570,920,1.3),(16.2,570,920,1.3),(17.5,575,925,1.55),
+        (18.5,575,925,1.55),(20.8,540,910,1.12),(23.12,540,910,1.1)],
+ 'basics':[(23.12,540,900,1.12),(24.3,540,880,1.12),(28.8,540,865,1.16)],
+ 'read':[(28.8,565,900,1.35),(30.6,590,870,1.4),(32.6,590,870,1.4),
+         (34.5,650,850,1.65),(36.88,650,850,1.65)],
+ 'cover':[(36.88,540,960,1),(40,540,960,1)]}
+
+def camera(t,name):
+ keys=CAMERA[name]
+ for a,b in zip(keys,keys[1:]):
+  if t<=b[0]: return blend(a[1:],b[1:],ramp(t,a[0],b[0]))
+ return keys[-1][1:]
+
 def frame(t):
- idx=max(i for i,(a,b,n) in enumerate(SCENES) if t>=a)
- a,b,n=SCENES[idx]; im=scene(t,n)
- if idx>0 and t<a+.65:
-  prev=scene(t,SCENES[idx-1][2]); im=Image.blend(prev,im,ramp(t,a,a+.65))
- return im
+ name=next(n for a,b,n in SCENES if a<=t<b) if t<40 else 'cover'
+ im=scene(t,name)
+ cx,cy,z=camera(t,name)
+ # One brief damped recoil on "podraznienie"; no looping shake.
+ q=max(0,t-10.64)
+ if 10.64<=t<10.95:
+  cx+=3.2*math.sin(q*65)*math.exp(-q*12)
+  cy+=1.7*math.sin(q*83)*math.exp(-q*12)
+ stage=im.transform((W,H),Image.Transform.AFFINE,
+       (1/z,0,cx-540/z,0,1/z,cy-830/z),Image.Resampling.BICUBIC,fillcolor=BG)
+ # Camera never moves captions; crop world into a dedicated safe stage.
+ out=Image.new('RGB',(W,H),BG)
+ out.paste(stage.crop((0,180,W,1325)),(0,180))
+ return out
 
 def frame_bytes(i): return frame(i/FPS).tobytes()
 def render(path,duration=40):
